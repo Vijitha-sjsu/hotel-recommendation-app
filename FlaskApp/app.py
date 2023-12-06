@@ -1,42 +1,41 @@
-from flask_cors import CORS
 from flask import Flask, request, jsonify
-from joblib import load
+from flask_cors import CORS
+import joblib
 import pandas as pd
+import numpy as np
+import traceback
 
 app = Flask(__name__)
-CORS(app)
+CORS(app)  # Enable CORS for all domains on all routes
 
-# Load the trained model
-model = load('hotel_recommendation_model.joblib')
+# Load the model and preprocessor
+model = joblib.load('tuned_ensemble_model.joblib')
+preprocessor = joblib.load('preprocessor.joblib')
 
-# Function to preprocess input data
-def preprocess_input(data):
-    df = pd.DataFrame([data])
-    # No need for date_time and PCA-transformed destination data
-    # Assuming these are the only features used in training
-    return df
-
-@app.route('/recommend', methods=['POST'])
-def recommend_hotels():
+@app.route('/predict', methods=['POST'])
+def predict():
     try:
-        data = request.json
-        print("Received data:", data)  # Log the received data
-        # Preprocess the input data
-        processed_data = preprocess_input(data)
+        # Log the request
+        print("Received request: ", request.get_json())
 
-        # Get the top N predictions
-        top_n = 5  # Change this to get more or fewer recommendations
-        probabilities = model.predict_proba(processed_data)[0]
-        top_n_predictions = probabilities.argsort()[-top_n:][::-1]
-        
-        # Return the response with top N hotel recommendations
-        response = jsonify({'hotel_recommendations': top_n_predictions.tolist()})
+        data = request.get_json()
+        input_df = pd.DataFrame([data])
+        preprocessed_input = preprocessor.transform(input_df)
 
-        print("Predictions:", response)  # Log the predictions
+        if hasattr(model, 'predict_proba'):
+            probabilities = model.predict_proba(preprocessed_input)
+            top5_indices = np.argsort(probabilities, axis=1)[:, -5:]
+            top5_indices = np.fliplr(top5_indices)
+            top5_labels = [model.classes_[indices] for indices in top5_indices][0]
+            return jsonify({'top5_recommendations': top5_labels.tolist()})
+        else:
+            prediction = model.predict(preprocessed_input)
+            return jsonify({'prediction': prediction.tolist()})
 
-        return response
     except Exception as e:
-        return jsonify({'error': str(e)})
+        print("An error occurred: ", e)
+        traceback.print_exc()
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -3,30 +3,41 @@ import axios from 'axios';
 import './App.css';
 
 function App() {
+  const [userLocationCity, setUserLocationCity] = useState('');
+  const [origDestinationDistance, setOrigDestinationDistance] = useState('');
   const [destinationId, setDestinationId] = useState('');
   const [adultsCount, setAdultsCount] = useState('');
   const [childrenCount, setChildrenCount] = useState('');
   const [roomsCount, setRoomsCount] = useState('');
+  const [hotelCountry, setHotelCountry] = useState('');
   const [hotels, setHotels] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const payload = {
+        user_location_city: userLocationCity,
+        orig_destination_distance: origDestinationDistance,
         srch_destination_id: destinationId,
         srch_adults_cnt: adultsCount,
         srch_children_cnt: childrenCount,
-        srch_rm_cnt: roomsCount
+        srch_rm_cnt: roomsCount,
+        hotel_country: hotelCountry
       };
-  
-      const response = await axios.post('http://localhost:5000/recommend', payload);
-      console.log("Response from server:", response.data); 
 
-      if (response.data && Array.isArray(response.data.hotel_recommendations)) {
-        console.log("Hotel recommendations:", response.data.hotel_recommendations);  // Log the recommendations
-        setHotels(response.data.hotel_recommendations);
-    }else {
-        setHotels([]);
+      const response = await axios.post('http://localhost:5000/predict', payload);
+      
+      if (response.data.error) {
+        console.error("Error from server:", response.data.error);
+      } else {
+        console.log("Response from server:", response.data);
+
+        if (response.data && Array.isArray(response.data.top5_recommendations)) {
+          console.log("Top 5 hotel recommendations:", response.data.top5_recommendations);
+          setHotels(response.data.top5_recommendations);
+        } else {
+          setHotels([]);
+        }
       }
     } catch (error) {
       console.error('Error fetching hotel recommendations:', error);
@@ -40,9 +51,23 @@ function App() {
       <form onSubmit={handleSubmit} className="form-container">
         <input 
           type="text" 
+          value={userLocationCity} 
+          onChange={(e) => setUserLocationCity(e.target.value)} 
+          placeholder="User Location City" 
+          className="input-field" 
+        />
+        <input 
+          type="text" 
+          value={origDestinationDistance} 
+          onChange={(e) => setOrigDestinationDistance(e.target.value)} 
+          placeholder="Original Destination Distance" 
+          className="input-field" 
+        />
+        <input 
+          type="text" 
           value={destinationId} 
           onChange={(e) => setDestinationId(e.target.value)} 
-          placeholder="Destination ID" 
+          placeholder="Search Destination ID" 
           className="input-field" 
         />
         <input 
@@ -64,6 +89,13 @@ function App() {
           value={roomsCount} 
           onChange={(e) => setRoomsCount(e.target.value)} 
           placeholder="Number of Rooms" 
+          className="input-field" 
+        />
+        <input 
+          type="text" 
+          value={hotelCountry} 
+          onChange={(e) => setHotelCountry(e.target.value)} 
+          placeholder="Hotel Country" 
           className="input-field" 
         />
         <button type="submit" className="submit-button">Get Recommendations</button>

@@ -57,3 +57,48 @@
   background-color: #4CAF50;
   color: white;
 }
+
+/* App.css */
+/* ... existing styles ... */
+
+/* Styles for hotel cluster list */
+.hotels-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.hotels-list li {
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #333;
+}
+
+/* Add some hover effects for interactive feel */
+.hotels-list li:hover {
+  background-color: #e9e9e9;
+  cursor: pointer;
+}
+
+/* Style for the 'Get Recommendations' button */
+.submit-button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.submit-button:hover {
+  background-color: #45a049;
+}
