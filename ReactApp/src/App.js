@@ -49,55 +49,69 @@ function App() {
     <div className="app-container">
       <h1>Hotel Recommendation</h1>
       <form onSubmit={handleSubmit} className="form-container">
+        <div className = "input-row">
+        <label className='input-label'>User Location City ID:</label>
         <input 
           type="text" 
           value={userLocationCity} 
           onChange={(e) => setUserLocationCity(e.target.value)} 
-          placeholder="User Location City" 
           className="input-field" 
         />
+        </div>
+        <div className = "input-row">
+        <label className='input-label'>Original Destination Distance:</label>
         <input 
           type="text" 
           value={origDestinationDistance} 
           onChange={(e) => setOrigDestinationDistance(e.target.value)} 
-          placeholder="Original Destination Distance" 
           className="input-field" 
         />
+        </div>
+        <div className = "input-row">
+        <label className='input-label'>Search Destination ID:</label>
         <input 
           type="text" 
           value={destinationId} 
           onChange={(e) => setDestinationId(e.target.value)} 
-          placeholder="Search Destination ID" 
           className="input-field" 
         />
+        </div>
+        <div className = "input-row">
+        <label className='input-label'>Number of Adults:</label>
         <input 
           type="number" 
           value={adultsCount} 
           onChange={(e) => setAdultsCount(e.target.value)} 
-          placeholder="Number of Adults" 
           className="input-field" 
         />
+        </div>
+        <div className = "input-row">
+        <label className='input-label'>Number of Children:</label>
         <input 
           type="number" 
           value={childrenCount} 
           onChange={(e) => setChildrenCount(e.target.value)} 
-          placeholder="Number of Children" 
           className="input-field" 
         />
+        </div>
+         <div className = "input-row">
+        <label className='input-label'>Number of Rooms:</label>
         <input 
           type="number" 
           value={roomsCount} 
           onChange={(e) => setRoomsCount(e.target.value)} 
-          placeholder="Number of Rooms" 
           className="input-field" 
         />
+        </div>
+         <div className = "input-row">
+        <label className='input-label'>Hotel Country ID:</label>
         <input 
           type="text" 
           value={hotelCountry} 
           onChange={(e) => setHotelCountry(e.target.value)} 
-          placeholder="Hotel Country" 
           className="input-field" 
         />
+        </div>
         <button type="submit" className="submit-button">Get Recommendations</button>
       </form>
 

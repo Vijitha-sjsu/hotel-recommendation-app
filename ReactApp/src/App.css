@@ -10,6 +10,11 @@
   align-items: center;
   justify-content: center;
 }
+.input-label {
+  min-width: 220px; 
+  text-align: right;
+}
+
 
 .input-field {
   margin: 10px;
@@ -17,6 +22,14 @@
   border: 2px solid #ddd;
   border-radius: 4px;
   width: 200px;
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
 }
 
 .submit-button {
