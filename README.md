@@ -32,7 +32,8 @@ The Flask application handles data processing. It preprocesses the input by usin
 If you prefer using Docker, both the React and Flask applications include Dockerfiles. Follow the standard Docker procedures to build and run containers for each part of the application.
 
 ## Additional Resources
-- **Project Report**: [View Report](https://colab.research.google.com/drive/1Mgtv7zuU8F-tQZxqQVengiVZxJXEqRyh?usp=sharing)
+- **Colab Notebook of the ensemble model(main approach)**: [View Colab](https://colab.research.google.com/drive/1Mgtv7zuU8F-tQZxqQVengiVZxJXEqRyh?usp=sharing)
+- **Project Report**: [View Report](https://docs.google.com/document/d/1jB80GH-MP0GFyoXnChJrdWJr2tFsN_qj8E9-ydbRbCI/edit?usp=sharing)
 - **CRISP-DM Report**: [View Report](https://docs.google.com/document/d/1dD_71V73G-rWyzwRhZbbkCyz8R6-YHa4ZVmL90DHcCo/edit?usp=sharing)
 - **PPT Slide Deck**: [View Slides](https://docs.google.com/presentation/d/1Nw28nkZSgrzF0ougOr9yoQT49979JLGQZ2o3KZKGiEU/edit?usp=sharing)
 - **Video Demo**: [View Demo](#) (Link to be added)
