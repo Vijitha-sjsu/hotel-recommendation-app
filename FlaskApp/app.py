@@ -1,22 +1,37 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS
 import joblib
-import pandas as pd
 import numpy as np
+import pandas as pd
+import os
+import logging
 import traceback
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all domains on all routes
 
-# Load the model and preprocessor
-model = joblib.load('tuned_ensemble_model.joblib')
-preprocessor = joblib.load('preprocessor.joblib')
+prefix = '/opt/ml/'
+model_path = os.path.join(prefix, 'model')
+logging.info("Model Path" + str(model_path))
+# model_path = ''
 
-@app.route('/predict', methods=['POST'])
+model = joblib.load(os.path.join(model_path, 'tuned_ensemble_model.joblib'))
+preprocessor = joblib.load(os.path.join(model_path, 'preprocessor.joblib'))
+logging.info("tuned_ensemble Model: " + str(model))
+
+
+@app.route('/ping', methods=['GET'])
+def ping():
+    try:
+        health = model is not None
+        status = 200 if health else 404
+        return jsonify({'status': 'ok'}), status
+    except Exception as e:
+        return jsonify({'error': str(e)}), 404
+
+@app.route('/invocations', methods=['POST'])
 def predict():
     try:
         # Log the request
-        print("Received request: ", request.get_json())
+        # print("Received request: ", request.get_json())
 
         data = request.get_json()
         input_df = pd.DataFrame([data])
@@ -38,4 +53,4 @@ def predict():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False, host='0.0.0.0', port=8080)

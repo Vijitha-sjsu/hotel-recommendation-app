@@ -1,6 +1,6 @@
-Flask==1.1.2
-Flask-CORS==3.0.10
-joblib==1.0.1
-pandas==1.2.4
-numpy==1.20.3
-scikit-learn==0.24.2
+flask
+pandas
+scikit-learn==1.2.2
+joblib
+gunicorn 
+xgboost
