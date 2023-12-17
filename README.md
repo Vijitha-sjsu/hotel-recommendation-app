@@ -36,7 +36,7 @@ If you prefer using Docker, both the React and Flask applications include Docker
 - **Project Report**: [View Report](https://docs.google.com/document/d/1jB80GH-MP0GFyoXnChJrdWJr2tFsN_qj8E9-ydbRbCI/edit?usp=sharing)
 - **CRISP-DM Report**: [View Report](https://docs.google.com/document/d/1dD_71V73G-rWyzwRhZbbkCyz8R6-YHa4ZVmL90DHcCo/edit?usp=sharing)
 - **PPT Slide Deck**: [View Slides](https://docs.google.com/presentation/d/1Nw28nkZSgrzF0ougOr9yoQT49979JLGQZ2o3KZKGiEU/edit?usp=sharing)
-- **Video Demo**: [View Demo](#) (Link to be added)
+- **Video Demo**: [View Demo](https://drive.google.com/file/d/11OVmeeQtcLjU614FDOPWwrdhGSW-4UU4/view?usp=sharing) 
 - **Alternative Approaches**:
   - [Approach 1](https://colab.research.google.com/drive/1XI0hjYnVMWUw6aNNJSQC48iYSY-BATqQ?usp=sharing)
   - [Approach 2](https://colab.research.google.com/drive/1KWy_-b1b2uG985JOmB764vDnhrwXLHZz?usp=sharing)
